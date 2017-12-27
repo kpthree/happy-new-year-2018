@@ -1,3 +1,2 @@
-require('bootstrap/dist/css/bootstrap.min.css');
+require('../css/custom.css')
 require('./cloudinary')
-require('jquery')
