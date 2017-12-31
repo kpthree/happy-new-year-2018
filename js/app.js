@@ -16,14 +16,26 @@ function getQueryVariable(variable) {
         }
     }
 }
+function getName(inputValue) {
+    var name = inputValue;
+    if (name === undefined || name === "") {
+        name = "[Your Name]"
+    }
+    name = name.replace(",", "%25252C").replace("%", "%2525")
+    return name;
+}
 const IMAGE_URL = "https://res.cloudinary.com/kunal/image/upload/c_mfit,g_south,h_1000,l_b2b2b2_wj7kzb,o_69,w_1557,x_0,y_102/l_text:Abril%20Fatface_65:__MESSAGE__,co_rgb:fffa00,y_360/w_800,q_auto/v1514480777/Happy-New-Year-Pictures-2018-6_egunvr.jpg"
 var nameEle = document.getElementById("name");
 var finalImageEle = document.getElementById("finalImage");
-finalImageEle.setAttribute("src", IMAGE_URL.replace(/__MESSAGE__/, getQueryVariable('n')))
+finalImageEle.setAttribute("src", IMAGE_URL.replace(/__MESSAGE__/, getName(getQueryVariable('n'))))
 
 document.querySelector("input[type=submit]").onclick = function(e) {
     e.preventDefault()
     var nameEle = document.getElementById("name");
-    window.location.href = window.location.origin + "?n=" + nameEle.value;
+    var name = getName(nameEle.value)
+    if (name == "") {
+        return
+    }
+    window.location.href = window.location.origin + "?n=" + name
 }
 
